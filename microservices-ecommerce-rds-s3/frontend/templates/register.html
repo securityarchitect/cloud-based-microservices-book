@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_field %}
+{% from "macros.html" import count_items %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Register</h2>
+    <strong>{{ message }}</strong>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.username) }}
+        {{ render_field(form.first_name) }}
+        {{ render_field(form.last_name) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.password) }}
+        {{ form.submit(class_="btn btn-success pull-right") }}
+    </form>
+</div>
+{% endblock %}
