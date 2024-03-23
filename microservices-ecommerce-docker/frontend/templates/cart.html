@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_field %}
+{% from "macros.html" import count_items %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+  <h2>Shopping Cart</h2>
+  {% if products | length > 0 %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td><img src="{{product.image}}" style="max-width: 80px;"> {{product.name}}</td>
+        <td>${{product.price}}</td>
+        <td>{{product.quantity}}</td>
+        <td>${{product.total}}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+  <strong>Total Amount: ${{totalamount}}</strong><br><br>
+  <a href="/checkout"><button class="btn btn-primary">Checkout</button></a>
+  {% else %}
+    <strong><p class="mt-5">Cart is empty!</p></strong>
+    {% endif %}
+</div>
+{% endblock %}
