@@ -1,0 +1,13 @@
+.card {
+    height: 450px;
+}
+
+.card-img-top {
+    height: 350px;
+    width: 350px;
+    object-fit: hide;
+}
+
+.text-white{
+    color: #fff;
+}
