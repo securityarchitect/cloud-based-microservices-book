@@ -1,0 +1,8 @@
+[program:frontend-supervisor]
+directory=/home/ubuntu/ecommerce/frontend
+command=/usr/local/bin/gunicorn wsgi:app -c /home/ubuntu/ecommerce/frontend/gunicorn.py
+
+user=root
+autostart=true
+autorestart=true
+redirect_stderr=true

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_field %}
+{% from "macros.html" import count_items %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% set url = "/product/" + product.slug %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{product.image}}" width="100%" alt="Product Image">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}
+      </p>
+      <h4>Price: ${{ product.price }}</h4>
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <button type="submit" class="btn btn-primary" id="buy-now">Add To Cart</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h3>Reviews</h3>
+  
+  {% for review in reviews %}
+  <div class="media mb-3">
+    <img src="{{review.photo}}" class="mr-3 rounded-circle" width="50">
+    <div class="media-body">
+      <h5 class="mt-0">{{review.user_name}} - <small><i> {{review.date_added}}</i></small></h5>
+
+      <input required class="rating" type="number" value="{{review.rating}}" title=""  data-theme="krajee-fas" data-min=0 data-max=5 data-step=0.5 data-size="xs"  data-show-caption="false" data-show-clear="false" data-display-only="true">
+      
+      {{review.description}}
+    </div>
+  </div>
+  {% endfor %}
+
+
+  
+  <form action="/postreview" method="post">
+    <input type="hidden" name="productid" value="{{product.id}}">
+    <input type="hidden" name="productslug" value="{{product.slug}}">
+    <div class="form-group">
+      <h4>Add Review</h4>
+      <input required class="rating" id="ratinginput" name="ratinginput" type="number" value="0" title=""  data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="sm"  data-show-caption="false" data-show-clear="false" data-display-only="false">
+      <textarea class="form-control" rows="5" id="reviewinput" name="reviewinput"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Post Review</button>
+  </form>
+  <br><br>
+</div>
+{% endblock %}
